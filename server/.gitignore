@@ -1,0 +1,80 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directories
+lib-cov
+coverage
+.nyc_output
+
+# Instrumented libraries (jscoverage/JSCover)
+lib-cov
+
+# Build and distribution directories
+build/
+dist/
+out/
+temp/
+tmp/
+public/temp/
+
+# Dependency directories
+node_modules/
+jspm_packages/
+bower_components/
+typings/
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm/yarn/pnpm caches
+.npm
+.yarn
+.pnpm-store
+
+# ESLint / Prettier
+.eslintcache
+.prettiercache
+
+# REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Lock files (optional, if you don’t want to commit them)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# VSCode and other editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs or uploaded assets
+uploads/
+storage/
