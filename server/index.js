@@ -13,6 +13,14 @@ app.use(cookieParser());
 
 
 
+import authRoutes from './routes/auth.routes.js';
+import userRoutes from './routes/user.routes.js';
+//Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+
+
+
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, ()=>{
     console.log(`Server is listening on port ${PORT}`)
