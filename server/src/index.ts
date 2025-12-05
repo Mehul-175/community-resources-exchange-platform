@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction, RequestHandler } from 'express';
 import 'dotenv/config'
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -13,8 +13,8 @@ app.use(cookieParser());
 
 
 
-import authRoutes from './routes/auth.routes.js';
-import userRoutes from './routes/user.routes.js';
+import authRoutes from './routes/auth.routes';
+import userRoutes from './routes/user.routes';
 //Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
