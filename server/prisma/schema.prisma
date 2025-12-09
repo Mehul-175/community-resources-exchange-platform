@@ -12,3 +12,97 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+//Enums
+enum Role{
+  ADMIN
+  MEMBER
+}
+
+enum CommunityType{
+  PRIVATE
+  PUBLIC
+}
+
+enum ResourceStatus{
+  AVAILABLE
+  SOLD
+}
+
+enum ListingType{
+  SALE
+  GIVEAWAY
+  EXCHANGE
+}
+
+
+//Models
+model User {
+  id String @id @default(uuid())
+  username String @unique
+  profilePic String?
+  bio String?
+  email String @unique
+  firstName String
+  lastName String
+  password String
+  membership Membership[]
+  resources Resource[]
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+}
+
+model Community {
+  id String @id @default(uuid())
+  name String
+  description String
+  type CommunityType
+  accessCode  String?       // Only needed if Private
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  memberships Membership[] // A community has many members
+  resources   Resource[]   // A community has many resources listed
+}
+
+model Resource {
+  id          String         @id @default(uuid())
+  title       String
+  description String
+  listingType ListingType
+  price       Decimal?       @db.Decimal(10, 2)
+  imageUrl    String?
+  status      ResourceStatus @default(AVAILABLE)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // Relations
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  
+  communityId String
+  community   Community @relation(fields: [communityId], references: [id])
+
+  // Indexes for performance
+  @@index([communityId])
+  @@index([listingType])
+}
+
+// --- THE BRIDGE TABLE ---
+
+model Membership {
+  role      Role     @default(MEMBER)
+  joinedAt  DateTime @default(now())
+
+  // Relations
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  
+  communityId String
+  community   Community @relation(fields: [communityId], references: [id])
+
+  // COMPOSITE PRIMARY KEY
+  // This ensures a User can join a specific Community only ONCE.
+  @@id([userId, communityId])
+}
