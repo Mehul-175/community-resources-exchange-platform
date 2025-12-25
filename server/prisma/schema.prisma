@@ -46,6 +46,7 @@ model User {
   firstName String
   lastName String
   password String
+  refreshToken String?
   membership Membership[]
   resources Resource[]
   created_at DateTime @default(now())
